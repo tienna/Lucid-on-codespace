@@ -21,6 +21,6 @@
       }
     }
   },
-  "postCreateCommand": "git submodule update --init; /bin/bash",
+  "postCreateCommand": "/bin/bash",
   "remoteUser": "vscode"
 }
