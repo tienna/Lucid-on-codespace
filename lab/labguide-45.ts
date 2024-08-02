@@ -1,9 +1,12 @@
 import { Blockfrost, Lucid, fromText,} from "https://deno.land/x/lucid@0.10.7/mod.ts";
-const lucid = await Lucid.new(new Blockfrost( "https://cardano-preview.blockfrost.io/api/v0", "preview4xxxxx",),"Preview",);
 
-//===============Active Bob Wallet ==============================
-const Bob_mnonic = "nhap vao 24 ky tu";
+//Nhập vào API KEY cho mạng Preview
+const lucid = await Lucid.new(new Blockfrost( "https://cardano-preview.blockfrost.io/api/v0", "preview4XXXXX",),"Preview",);
+
+// Nhập vào 24 ký tự ví của Bob
+const Bob_mnonic = "điền 24 ký tự vào đây";
 lucid.selectWalletFromSeed(Bob_mnonic);
+
 
 // Tạo minting policy. Chỉ những người sở hữu khóa chính sách mới có thể đúc hoặc đốt mã thông báo được tạo theo chính sách cụ thể này.
 const rewardAddress = await lucid.wallet.rewardAddress();
