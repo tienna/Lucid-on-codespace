@@ -1,0 +1,2 @@
+cardano@meai-vps:~/lucid_codespace/lab$ deno run --allow-all 05.lab5-2.ts 
+Bạn có thể kiểm tra giao dịch tại: https://preview.cexplorer.io/tx/355697ee2e9c5f50d395dc1cacaadd636fa46db5afacbf0e976220d4b2ee18bc
