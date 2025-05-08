@@ -1,0 +1,81 @@
+{
+  "preamble": {
+    "title": "bk03/parameterized_simple",
+    "description": "Aiken contracts for project 'bk03/parameterized_simple'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.9+2217206"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "parameters.validate.spend",
+      "datum": {
+        "title": "_datum",
+        "schema": {
+          "$ref": "#/definitions/parameters~1Redeemer"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/parameters~1Redeemer"
+        }
+      },
+      "parameters": [
+        {
+          "title": "owner",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "589e01010032323232323223225333004323232323253330093370e900118051baa0011323322533300c3370e900018069baa005132325333011301300213371e6eb8c048c040dd5003a450d556e6c6f6b6320666f72206d650016375c6022002601c6ea801458c038004c038c03c004c02cdd50008b1806180680198058011805001180500098031baa00114984d958dd7000ab9a5573aaae7955cfaba15745",
+      "hash": "012810ef6de63c21f9d471e86e46c741111ab2e5cd31d6be9c519024"
+    },
+    {
+      "title": "parameters.validate.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "owner",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "589e01010032323232323223225333004323232323253330093370e900118051baa0011323322533300c3370e900018069baa005132325333011301300213371e6eb8c048c040dd5003a450d556e6c6f6b6320666f72206d650016375c6022002601c6ea801458c038004c038c03c004c02cdd50008b1806180680198058011805001180500098031baa00114984d958dd7000ab9a5573aaae7955cfaba15745",
+      "hash": "012810ef6de63c21f9d471e86e46c741111ab2e5cd31d6be9c519024"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "parameters/Redeemer": {
+      "title": "Redeemer",
+      "anyOf": [
+        {
+          "title": "Redeemer",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "msg",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

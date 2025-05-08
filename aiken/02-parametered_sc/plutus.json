@@ -1,0 +1,97 @@
+{
+  "preamble": {
+    "title": "bk03/02-parametered_sc",
+    "description": "Aiken contracts for project 'bk03/02-parametered_sc'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.9+2217206"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "parameterized.hello_parameterized.spend",
+      "datum": {
+        "title": "_datum",
+        "schema": {
+          "$ref": "#/definitions/parameterized~1Datum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/parameterized~1Redeemer"
+        }
+      },
+      "parameters": [
+        {
+          "title": "owner",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "58e801010032323232323223225333004323232323253330093370e900118051baa0011323322533300c3370e900018069baa0051323253330113013002132533300f3371e6eb8c04cc044dd500424410b48656c6c6f2c20424b303300100114a064660020026eb0c04cc050c050c050c050c050c050c050c050c044dd50049129998098008a501332253330123371e00402029444cc010010004dd7180a000980a8008b1bae3011001300e375400a2c601c002601c601e00260166ea800458c030c03400cc02c008c028008c028004c018dd50008a4c26cac6eb80055cd2ab9d5573caae7d5d0aba201",
+      "hash": "da7a119b4d36f73c8c3b7c4eedfc0647c24a35c8a0254ccf76a7766d"
+    },
+    {
+      "title": "parameterized.hello_parameterized.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "owner",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "58e801010032323232323223225333004323232323253330093370e900118051baa0011323322533300c3370e900018069baa0051323253330113013002132533300f3371e6eb8c04cc044dd500424410b48656c6c6f2c20424b303300100114a064660020026eb0c04cc050c050c050c050c050c050c050c050c044dd50049129998098008a501332253330123371e00402029444cc010010004dd7180a000980a8008b1bae3011001300e375400a2c601c002601c601e00260166ea800458c030c03400cc02c008c028008c028004c018dd50008a4c26cac6eb80055cd2ab9d5573caae7d5d0aba201",
+      "hash": "da7a119b4d36f73c8c3b7c4eedfc0647c24a35c8a0254ccf76a7766d"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "parameterized/Datum": {
+      "title": "Datum",
+      "anyOf": [
+        {
+          "title": "Datum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "owner",
+              "$ref": "#/definitions/VerificationKeyHash"
+            }
+          ]
+        }
+      ]
+    },
+    "parameterized/Redeemer": {
+      "title": "Redeemer",
+      "anyOf": [
+        {
+          "title": "Redeemer",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "msg",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

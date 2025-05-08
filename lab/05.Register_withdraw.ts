@@ -25,13 +25,13 @@ lucid.selectWalletFromSeed(Bob_mnonic);
 const rewardAddress = await lucid.wallet.rewardAddress();
 console.log(rewardAddress);
 const tx = await lucid.newTx()
-   .registerStake(rewardAddress)
-//   .withdraw(rewardAddress)  // Phải lấy tiền thưởng về trước khi hủy đăng ký
-//   .deregisterStake(rewardAddress)  // Hủy đăng ký
-  .commit();
+  //  .registerStake(rewardAddress)
+//    .withdraw(rewardAddress)  // Phải lấy tiền thưởng về trước khi hủy đăng ký
+ .deregisterStake(rewardAddress)  // Hủy đăng ký
+   .commit();
 
 const signedTx = await tx.sign().commit();
 const txHash = await signedTx.submit();
 // await Deno.writeTextFile("./cbor/registerStake.log", `cbor code: ${signedTx}` +"\n");
 // await Deno.writeTextFile("./cbor/registerStake.log", `Bạn có thể kiểm tra giao dịch tại: https://preview.cexplorer.io/tx/${txHash}` + "\n", { append: true });
-console.log(`Bạn có thể kiểm tra giao dịch tại: https://preview.cexplorer.io/tx/${txHash}`);
+console.log(`Bạn có thể kiểm tra giao dịch tại: https://preprod.cexplorer.io/tx/${txHash}`);

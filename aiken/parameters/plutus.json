@@ -1,0 +1,92 @@
+{
+  "preamble": {
+    "title": "bk03/parameters",
+    "description": "Aiken contracts for project 'bk03/parameters'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.9+2217206"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "parameters.validate.spend",
+      "datum": {
+        "title": "_datum_opt",
+        "schema": {
+          "$ref": "#/definitions/parameters~1MyData"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/parameters~1MyData"
+        }
+      },
+      "parameters": [
+        {
+          "title": "my_data",
+          "schema": {
+            "$ref": "#/definitions/parameters~1MyData"
+          }
+        }
+      ],
+      "compiledCode": "58b0010100323232323232225333003323232323253330083370e900118049baa0011323322533300b3370e900018061baa0051323232323232533301430160021323371e6eb8c004c050dd50089bae3001301437540184602c602e0022c6eb8c050004c050008dd7180900098090011bad3010001300d375400a2c601a002601a601c00260146ea800458c02cc03000cc028008c024008c024004c014dd50008a4c26cacae6955ceaab9e5573eae855d101",
+      "hash": "0bcf00b5e2d4520f475a959b5d95793055005543056f5bf3fccc5e1a"
+    },
+    {
+      "title": "parameters.validate.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "my_data",
+          "schema": {
+            "$ref": "#/definitions/parameters~1MyData"
+          }
+        }
+      ],
+      "compiledCode": "58b0010100323232323232225333003323232323253330083370e900118049baa0011323322533300b3370e900018061baa0051323232323232533301430160021323371e6eb8c004c050dd50089bae3001301437540184602c602e0022c6eb8c050004c050008dd7180900098090011bad3010001300d375400a2c601a002601a601c00260146ea800458c02cc03000cc028008c024008c024004c014dd50008a4c26cacae6955ceaab9e5573eae855d101",
+      "hash": "0bcf00b5e2d4520f475a959b5d95793055005543056f5bf3fccc5e1a"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "parameters/MyData": {
+      "title": "MyData",
+      "anyOf": [
+        {
+          "title": "MyData",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "a",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "b",
+              "$ref": "#/definitions/VerificationKeyHash"
+            },
+            {
+              "title": "c",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
