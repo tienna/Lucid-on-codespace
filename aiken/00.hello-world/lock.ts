@@ -24,9 +24,6 @@ lucid.selectWalletFromSeed(Bob_mnonic);
     throw new Error("Failed to extract payment hash from address");
   }
 
- 
-
-
 const validator = await readValidator();
 const datumInline = Data.to(new Constr(0, [payment_hash]));
 const contractAddress = lucid.newScript(validator).toAddress();

@@ -1,4 +1,4 @@
-import {  Blockfrost, Lucid, Addresses,fromHex,toHex,applyParamsToScript, Data, Constr, } from "https://deno.land/x/lucid@0.20.9/mod.ts";
+import {  Blockfrost, Lucid, Addresses,fromHex,toHex,applyParamsToScript, Data, Constr,fromText } from "https://deno.land/x/lucid@0.20.9/mod.ts";
 import "jsr:@std/dotenv/load";
 import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
 import blueprint from "./plutus.json" with { type: "json" };
@@ -26,14 +26,14 @@ lucid.selectWalletFromSeed(Bob_mnonic);
   }
 
 // Hàm chuyển đổi UTF-8 sang hex
-function utf8ToHex(str: string): string {
-  if (typeof str !== "string" || str === undefined || str === null) {
-    throw new Error(`Invalid input for utf8ToHex: expected string, got ${str}`);
-  }
-  return Array.from(new TextEncoder().encode(str))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-}
+// function utf8ToHex(str: string): string {
+//   if (typeof str !== "string" || str === undefined || str === null) {
+//     throw new Error(`Invalid input for utf8ToHex: expected string, got ${str}`);
+//   }
+//   return Array.from(new TextEncoder().encode(str))
+//     .map((b) => b.toString(16).padStart(2, "0"))
+//     .join("");
+// }
 
  // Đọc validator từ plutus.json
  async function readValidator(): Promise<SpendingValidator> {
@@ -44,7 +44,7 @@ function utf8ToHex(str: string): string {
       };
     }
 // ========================= code thay doi tu day==============================
-const redeemer = Data.to(new Constr(0, [utf8ToHex("Unlokc for me")]));
+const redeemer = Data.to(new Constr(0, [fromText("Unlokc for me")]));
 console.log(`Redeemer sẽ được truyền vào SC là: ${redeemer}`);
 const validator = await readValidator();
 console.log(validator);
@@ -58,7 +58,7 @@ const scriptAddress=script.toAddress();
 console.log(`Địa chỉ script là: ${scriptAddress}`);
 
 const utxos = await lucid.utxosAt(scriptAddress);
-const utxo = utxos.find(u => u.assets.lovelace === 2_800_000n);
+const utxo = utxos.find(u => u.assets.lovelace === 2_900_000n);
 console.log(utxo);
 
 const tx = await lucid

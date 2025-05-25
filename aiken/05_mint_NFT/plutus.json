@@ -1,0 +1,143 @@
+{
+  "preamble": {
+    "title": "tienna/mint_nft",
+    "description": "Aiken contracts for project 'tienna/mint_nft'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.9+2217206"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "mint_nft.gift_card.spend",
+      "datum": {
+        "title": "_d",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "redeemer": {
+        "title": "_r",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "utxo_ref",
+          "schema": {
+            "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+          }
+        }
+      ],
+      "compiledCode": "5902730101003232323232323223222533300532323232323232323232532333010300500613233223232325333016300730173754002264a66602e601860306ea80044c8c94ccc070c07c0084c94ccc068cdc39bad301c002480044cdc780080c0a50375c60340022c603a002660160066eb8c070c064dd50008b1804980c1baa3009301837546036603860306ea8c06cc060dd50008b198039bac301a00223375e601260306ea8004014dd5980c980d180d180d180d000980a9baa00c3016001301630170013012375400e2a666020600200c2646464a66602660080022a66602c602a6ea802c0085854ccc04cc02000454ccc058c054dd50058010b0b18099baa00a1323232325333018301b00213232533301730083018375401e2a66602e601060306ea8cc0240148cdd79805980d1baa00101515333017300c00113371e00402a29405854ccc05ccdc3800a4002266e3c0080545281bad3018002375c602c0022c60320026600e6eacc060c064c064c064c06400800cdd6180b80098099baa00a375c602a60246ea801c58dc3a400044646600200200644a66602a0022980103d87a8000133225333014300500213374a90001980c00125eb804cc010010004c05c004c0600048c04c00488c94ccc03cc010c040dd50008a5eb7bdb1804dd5980a18089baa001323300100100322533301300114c103d87a800013233322253330143372200e0062a66602866e3c01c00c4cdd2a4000660306e980092f5c02980103d87a8000133006006001375c60240026eacc04c004c05c008c054004dc3a400460166ea8004c038c03c00cc034008c030008c030004c01cdd50008a4c26cac6eb80055cd2ab9d5573caae7d5d02ba15745",
+      "hash": "675eda685b40c32d3d2413fd2027d9f0cd7a07dcb3015fb70c5dc28d"
+    },
+    {
+      "title": "mint_nft.gift_card.mint",
+      "redeemer": {
+        "title": "rdmr",
+        "schema": {
+          "$ref": "#/definitions/mint_nft~1Action"
+        }
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "utxo_ref",
+          "schema": {
+            "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+          }
+        }
+      ],
+      "compiledCode": "5902730101003232323232323223222533300532323232323232323232532333010300500613233223232325333016300730173754002264a66602e601860306ea80044c8c94ccc070c07c0084c94ccc068cdc39bad301c002480044cdc780080c0a50375c60340022c603a002660160066eb8c070c064dd50008b1804980c1baa3009301837546036603860306ea8c06cc060dd50008b198039bac301a00223375e601260306ea8004014dd5980c980d180d180d180d000980a9baa00c3016001301630170013012375400e2a666020600200c2646464a66602660080022a66602c602a6ea802c0085854ccc04cc02000454ccc058c054dd50058010b0b18099baa00a1323232325333018301b00213232533301730083018375401e2a66602e601060306ea8cc0240148cdd79805980d1baa00101515333017300c00113371e00402a29405854ccc05ccdc3800a4002266e3c0080545281bad3018002375c602c0022c60320026600e6eacc060c064c064c064c06400800cdd6180b80098099baa00a375c602a60246ea801c58dc3a400044646600200200644a66602a0022980103d87a8000133225333014300500213374a90001980c00125eb804cc010010004c05c004c0600048c04c00488c94ccc03cc010c040dd50008a5eb7bdb1804dd5980a18089baa001323300100100322533301300114c103d87a800013233322253330143372200e0062a66602866e3c01c00c4cdd2a4000660306e980092f5c02980103d87a8000133006006001375c60240026eacc04c004c05c008c054004dc3a400460166ea8004c038c03c00cc034008c030008c030004c01cdd50008a4c26cac6eb80055cd2ab9d5573caae7d5d02ba15745",
+      "hash": "675eda685b40c32d3d2413fd2027d9f0cd7a07dcb3015fb70c5dc28d"
+    },
+    {
+      "title": "mint_nft.gift_card.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "token_name",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "utxo_ref",
+          "schema": {
+            "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+          }
+        }
+      ],
+      "compiledCode": "5902730101003232323232323223222533300532323232323232323232532333010300500613233223232325333016300730173754002264a66602e601860306ea80044c8c94ccc070c07c0084c94ccc068cdc39bad301c002480044cdc780080c0a50375c60340022c603a002660160066eb8c070c064dd50008b1804980c1baa3009301837546036603860306ea8c06cc060dd50008b198039bac301a00223375e601260306ea8004014dd5980c980d180d180d180d000980a9baa00c3016001301630170013012375400e2a666020600200c2646464a66602660080022a66602c602a6ea802c0085854ccc04cc02000454ccc058c054dd50058010b0b18099baa00a1323232325333018301b00213232533301730083018375401e2a66602e601060306ea8cc0240148cdd79805980d1baa00101515333017300c00113371e00402a29405854ccc05ccdc3800a4002266e3c0080545281bad3018002375c602c0022c60320026600e6eacc060c064c064c064c06400800cdd6180b80098099baa00a375c602a60246ea801c58dc3a400044646600200200644a66602a0022980103d87a8000133225333014300500213374a90001980c00125eb804cc010010004c05c004c0600048c04c00488c94ccc03cc010c040dd50008a5eb7bdb1804dd5980a18089baa001323300100100322533301300114c103d87a800013233322253330143372200e0062a66602866e3c01c00c4cdd2a4000660306e980092f5c02980103d87a8000133006006001375c60240026eacc04c004c05c008c054004dc3a400460166ea8004c038c03c00cc034008c030008c030004c01cdd50008a4c26cac6eb80055cd2ab9d5573caae7d5d02ba15745",
+      "hash": "675eda685b40c32d3d2413fd2027d9f0cd7a07dcb3015fb70c5dc28d"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Any Plutus data."
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "cardano/transaction/OutputReference": {
+      "title": "OutputReference",
+      "description": "An `OutputReference` is a unique reference to an output on-chain. The `output_index`\n corresponds to the position in the output list of the transaction (identified by its id)\n that produced that output",
+      "anyOf": [
+        {
+          "title": "OutputReference",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "transaction_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "output_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "mint_nft/Action": {
+      "title": "Action",
+      "anyOf": [
+        {
+          "title": "Mint",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Burn",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    }
+  }
+}
