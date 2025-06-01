@@ -12,8 +12,8 @@ validator validate(owner: VerificationKeyHash) {
     _input: OutputReference,
     _tx: Transaction,
   ) {
-    let must_say_hello = redeemer.msg == "Unlock for me"
-    must_say_hello
+    let must_say_unlock = redeemer.msg == "Unlock for me"
+    must_say_unlock
   }
 
   else(_) {

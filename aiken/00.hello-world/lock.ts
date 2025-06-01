@@ -27,7 +27,11 @@ lucid.selectWalletFromSeed(Bob_mnonic);
 const validator = await readValidator();
 const datumInline = Data.to(new Constr(0, [payment_hash]));
 const contractAddress = lucid.newScript(validator).toAddress();
+
+
+
     console.log("Contract address:", contractAddress);
+    
      const tx = await lucid
       .newTx()
       .payToContract(contractAddress, { Inline: datumInline },{ lovelace: 2900000n })

@@ -21,7 +21,7 @@ lucid.selectWalletFromSeed(Bob_mnonic);
   const wallet_address = await lucid.wallet.address();
   console.log(`Địa chỉ ví là: ${wallet_address}`);
   const payment_hash =  Addresses.inspect(wallet_address).payment?.hash;
-  if (!payment_hash) {
+    if (!payment_hash) {
     throw new Error("Failed to extract payment hash from address");
   }
 
@@ -43,22 +43,21 @@ lucid.selectWalletFromSeed(Bob_mnonic);
         script: toHex(cbor.encode(fromHex(validator.compiledCode))),
       };
     }
+
 // ========================= code thay doi tu day==============================
 const param = Data.to(new Constr(0, [fromText("Unlokc for me")]));
 console.log(`Param sẽ được truyền vào SC là: ${param}`);
 
 
 const validator = await readValidator();
-console.log(`Smart Contract chưa parameterized là: ${validator.script}`);
+console.log(`CBOR chưa parameterized là: ${validator.script}`);
 const parameterizedScript = applyParamsToScript([payment_hash],validator.script,);
-console.log(`Smart Contract đã parameterized là: ${parameterizedScript}`);
-
 const scriptAddress = lucid.newScript({
     type: "PlutusV3",
     script: parameterizedScript,
   }).toAddress();
 
-
+console.log(`Smart Contract đã parameterized là: ${parameterizedScript}`);
 console.log(`Địa chỉ script là: ${scriptAddress}`);
 
 const tx = await lucid

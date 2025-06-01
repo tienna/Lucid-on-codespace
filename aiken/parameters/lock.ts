@@ -44,29 +44,7 @@ function utf8ToHex(str: string): string {
       };
     }
 
-const DatumSchema = Data.Object({
-  a: Data.Integer,
-  b: Data.String,
-  c: Data.String,
-});
-type DatumSchemaType = Data.Static<typeof DatumSchema>;
 
-
-const datum: DatumSchemaType = {
-  a: 42n,
-  // b: fromHex(utf8ToHex("Hello-ParameterizedSC")),
-  b: payment_hash,
-  c: utf8ToHex("Hello-ParameterizedSC"),
-};
-const datumInline = Data.to(datum,DatumSchema);
-
-console.log(datum);
-console.log(datumInline);
-
-const validator = await readValidator();
-console.log(validator);
-const parameterizedScript = applyParamsToScript([datumInline],validator.script,);
-  // Tạo địa chỉ script
 
 const scriptAddress = lucid.newScript({
     type: "PlutusV3",

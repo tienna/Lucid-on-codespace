@@ -19,21 +19,12 @@ lucid.selectWalletFromSeed(Bob_mnonic);
   
   
   const wallet_address = await lucid.wallet.address();
-  console.log(`Địa chỉ ví là: ${wallet_address}`);
+  // console.log(`Địa chỉ ví là: ${wallet_address}`);
   const payment_hash =  Addresses.inspect(wallet_address).payment?.hash;
   if (!payment_hash) {
     throw new Error("Failed to extract payment hash from address");
   }
 
-// Hàm chuyển đổi UTF-8 sang hex
-// function utf8ToHex(str: string): string {
-//   if (typeof str !== "string" || str === undefined || str === null) {
-//     throw new Error(`Invalid input for utf8ToHex: expected string, got ${str}`);
-//   }
-//   return Array.from(new TextEncoder().encode(str))
-//     .map((b) => b.toString(16).padStart(2, "0"))
-//     .join("");
-// }
 
  // Đọc validator từ plutus.json
  async function readValidator(): Promise<SpendingValidator> {
@@ -44,21 +35,23 @@ lucid.selectWalletFromSeed(Bob_mnonic);
       };
     }
 // ========================= code thay doi tu day==============================
-const redeemer = Data.to(new Constr(0, [fromText("Unlokc for me")]));
+
+const redeemer = Data.to(new Constr(0, [fromText("Unlock for me")]));
 console.log(`Redeemer sẽ được truyền vào SC là: ${redeemer}`);
 const validator = await readValidator();
-console.log(validator);
+// console.log(validator);
+
 const parameterizedScript = applyParamsToScript([payment_hash],validator.script,);
 const script = lucid.newScript({
     type: "PlutusV3",
     script: parameterizedScript,
   });
-const scriptAddress=script.toAddress();
 
+const scriptAddress=script.toAddress();
 console.log(`Địa chỉ script là: ${scriptAddress}`);
 
 const utxos = await lucid.utxosAt(scriptAddress);
-const utxo = utxos.find(u => u.assets.lovelace === 2_900_000n);
+const utxo = utxos.find(u => u.txHash===  "d1804d0218957b5bdd34ccccabd2b693210b0620c4bffc17b4f57474a88f33ee");
 console.log(utxo);
 
 const tx = await lucid

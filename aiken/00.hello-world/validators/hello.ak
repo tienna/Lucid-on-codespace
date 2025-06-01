@@ -9,7 +9,7 @@ pub type Datum {
 pub type Redeemer {
   msg: ByteArray,
 }
-validator hello_world {
+validator hello_world  {
   spend(
     datum: Option<Datum>,
     redeemer: Redeemer,

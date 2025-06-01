@@ -1,18 +1,25 @@
 use aiken/collection/dict
 use aiken/collection/list
-use cardano/address.{Script}
-use cardano/assets.{PolicyId}
-use cardano/transaction.{OutputReference, Transaction} as tx
+// use aiken/crypto.{ VerificationKeyHash}
+use cardano/address.{Address, PaymentCredential, Script}
+use cardano/assets.{PolicyId, lovelace_of}
+use cardano/transaction.{Input, Output, OutputReference, Transaction} as tx
 
 pub type Action {
   Mint
   Burn
 }
 
-validator gift_card(token_name: ByteArray) {
+validator gift_card(
+  token_name: ByteArray,
+  platform_fee: Int,
+  platform_payment_credential: PaymentCredential,
+) {
   spend(_d, _r, own_ref: OutputReference, transaction: Transaction) {
-    // pattern matching với transaction để lấy ra inputs và spend từ transaction. 
     let Transaction { mint, inputs, .. } = transaction
+    // let output_utxo_platform =
+    //   find_output(outputs, platform_fee, platform_payment_credential)
+    // hàm expect với mint sẽ trả lại asset_name và amount  theo  policy_id từ giao dịch tương tác với Smart contract
     expect Some(own_input) =
       list.find(inputs, fn(input) { input.output_reference == own_ref })
     // input.output.address là địa chỉ của  
@@ -28,7 +35,9 @@ validator gift_card(token_name: ByteArray) {
   // redeemer, policy_id, transaction đều được lấy từ transaction thực
   mint(rdmr: Action, policy_id: PolicyId, transaction: Transaction) {
     // pattern matching với transaction để lấy ra inputs và mint từ transaction, trong đó mint chứa minted assets
-    let Transaction { inputs, mint, .. } = transaction
+    let Transaction { mint, outputs, .. } = transaction
+    let output_utxo_platform =
+      find_output(outputs, platform_fee, platform_payment_credential)
     // hàm expect với mint sẽ trả lại asset_name và amount  theo  policy_id từ giao dịch tương tác với Smart contract
     expect [Pair(asset_name, amount)] =
       mint
@@ -36,13 +45,26 @@ validator gift_card(token_name: ByteArray) {
         |> dict.to_pairs()
 
     when rdmr is {
-      Mint -> amount == 1 && asset_name == token_name
+      Mint -> amount == 1 && asset_name == token_name && output_utxo_platform
       // Unlock asset
-      Burn -> amount == -1 && asset_name == token_name
+      Burn -> amount == -1 && asset_name == token_name && output_utxo_platform
     }
   }
 
   else(_) {
     fail
   }
+}
+
+fn find_output(
+  outputs: List<Output>,
+  fee: Int,
+  addr_payment_hash: PaymentCredential,
+) {
+  list.any(
+    outputs,
+    fn(output) {
+      lovelace_of(output.value) >= fee && output.address.payment_credential == addr_payment_hash
+    },
+  )
 }
