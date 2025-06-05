@@ -45,6 +45,7 @@ function utf8ToHex(str: string): string {
     }
 // ========================= code thay doi tu day==============================
 const redeemer = Data.to(new Constr(0, [utf8ToHex("Hello, BK03")]));
+
 console.log(`Redeemer sẽ được truyền vào SC là: ${redeemer}`);
 const validator = await readValidator();
 console.log(validator);
@@ -60,6 +61,7 @@ console.log(`Địa chỉ script là: ${scriptAddress}`);
 const utxos = await lucid.utxosAt(scriptAddress);
 const utxo = utxos.find(u => u.assets.lovelace === 2_900_000n);
 if (!utxo) throw new Error("Không tìm thấy UTXO nào với 2.9 triệu lovelace");
+
 console.log(utxo);
 const tx = await lucid
     .newTx()

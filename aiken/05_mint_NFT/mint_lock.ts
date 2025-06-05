@@ -45,13 +45,14 @@ const parameterized_script = lucid.newScript(
   Params
 );
 
+console.log(parameterized_script.script);
 const scriptAddress = parameterized_script.toAddress();
 console.log(`Địa chỉ Parameterized script là: ${scriptAddress}`);
 const policyId = parameterized_script.toHash();
 const unit = policyId + fromText("BK03_0003");
 
 const mintRedeemer = Data.to(new Constr(0, []));
-// const mintRedeemer = Data.void()
+
 const tx = await lucid
   .newTx()
   .mint({ [unit]: 1n }, mintRedeemer)
@@ -59,7 +60,8 @@ const tx = await lucid
     "addr_test1qqew6jaz63u389gwnp8w92qntetzxs6j9222pn4cnej672vazs7a6wnrseqggj4d4ur43yq9e23r4q0m879t7efyhzjq8mvzua",
     { lovelace: 10000000n }
   )
-  .attachScript(parameterized_script)
+  .attachScript(parameterized_script.script)
+  .payToContract(scriptAddress, Data.void(), { [unit]: 1n })  //về smartcontract.mint     --> đúng phải chuyển về .spent 
   .commit();
 
 const signedTx = await tx.sign().commit();

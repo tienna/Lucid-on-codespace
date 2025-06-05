@@ -24,6 +24,7 @@ if (!payment_hash) {
 
 
 const validator = await readValidator();
+
 const parameterizedScript = applyParamsToScript([payment_hash],validator.script,);
 const scriptAddress = lucid.newScript({
   type: "PlutusV3",

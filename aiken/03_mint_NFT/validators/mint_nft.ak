@@ -5,8 +5,8 @@ use cardano/assets.{PolicyId}
 use cardano/transaction.{OutputReference, Transaction} as tx
 
 pub type Action {
-  Mint
-  Burn
+  Minting
+  Burning
 }
 
 validator gift_card(token_name: ByteArray) {
@@ -28,7 +28,11 @@ validator gift_card(token_name: ByteArray) {
   // redeemer, policy_id, transaction đều được lấy từ transaction thực
   mint(rdmr: Action, policy_id: PolicyId, transaction: Transaction) {
     // pattern matching với transaction để lấy ra inputs và mint từ transaction, trong đó mint chứa minted assets
-    let Transaction { inputs, mint, .. } = transaction
+    // PolicyId
+    // asset_name = BK02
+    // soluong = 1
+
+    let Transaction { mint, .. } = transaction
     // hàm expect với mint sẽ trả lại asset_name và amount  theo  policy_id từ giao dịch tương tác với Smart contract
     expect [Pair(asset_name, amount)] =
       mint
@@ -36,9 +40,9 @@ validator gift_card(token_name: ByteArray) {
         |> dict.to_pairs()
 
     when rdmr is {
-      Mint -> amount == 1 && asset_name == token_name
+      Minting -> amount == 1 && asset_name == token_name
       // Unlock asset
-      Burn -> amount == -1 && asset_name == token_name
+      Burning -> amount == -1 && asset_name == token_name
     }
   }
 

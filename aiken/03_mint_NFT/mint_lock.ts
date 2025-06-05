@@ -18,21 +18,22 @@ lucid.selectWalletFromSeed(Bob_mnonic);
 
 
 
-// const param = Data.to(new Constr(0, [fromText("BK03_0001")]));
 const validator = await readValidator();
-const parameterized_cbor = applyParamsToScript([fromText("BK03_0001")],validator.script);
+const parameterized_cbor = applyParamsToScript([fromText("BK02_0001")],validator.script);
 const parameterized_script = lucid.newScript({
   type: "PlutusV3",
   script: parameterized_cbor,
 });
 const scriptAddress =parameterized_script.toAddress();
+
 console.log(`Địa chỉ Parameterized script là: ${scriptAddress}`);
 const policyId = parameterized_script.toHash();
-const unit = policyId + fromText("BK03_0001");
+const unit = policyId + fromText("BK02_0001");
 console.log(`Tên của tài sản dạng hex là: ${unit}`);
 
 // 0 tương ứng với vị trí đầu tiên của của redeemer trong aiken=Mint
 const mintRedeemer = Data.to(new Constr(0, []));
+
 const tx = await lucid
       .newTx()
       .mint({[unit]: 1n},mintRedeemer)
