@@ -21,17 +21,12 @@ console.log(`Địa chỉ ví là: ${wallet_address}`);
 const payment_hash =  Addresses.inspect(wallet_address).payment?.hash;
 
 
-const token_name = fromText("BK03_0003");
+const token_name = fromText("BK02_0005");
 const fee_value = 10000000n;
 const payment_credential =  Addresses.inspect("addr_test1qqew6jaz63u389gwnp8w92qntetzxs6j9222pn4cnej672vazs7a6wnrseqggj4d4ur43yq9e23r4q0m879t7efyhzjq8mvzua").payment?.hash;
 console.log(payment_credential);
 
 const validator = await readValidator();
-// const parameterized_cbor = applyParamsToScript([token_name,fee_value,payment_credential],validator.script);
-// const parameterized_script = lucid.newScript({
-//   type: "PlutusV3",
-//   script: parameterized_cbor,
-// });
 const Params  = [Data.Bytes(), Data.Integer(), Data.Bytes()];
 const parameterized_script = lucid.newScript({
   type: "PlutusV3",
@@ -43,7 +38,7 @@ const parameterized_script = lucid.newScript({
 const scriptAddress =parameterized_script.toAddress();
 console.log(`Địa chỉ Parameterized script là: ${scriptAddress}`);
 const policyId = parameterized_script.toHash();
-const unit = policyId + fromText("BK03_0003");
+const unit = policyId + fromText("BK02_0005");
 const utxos = await lucid.utxosAt(wallet_address);
 // const utxo1 = utxos.find(u => u.txHash === "fc83d672482b12298feae43a5ef90a63551f5df96acdbf54a21c0c1f883d8eba" && u.outputIndex === 1);
 
@@ -63,6 +58,7 @@ const tx = await lucid
     // .addSigner(payment_hash)
     .commit();
 const signedTx = await tx.sign().commit();
+await Deno.writeTextFile("Burntx-signedTx.cbor", signedTx);
 const txHash = await signedTx.submit();
 console.log(`A NFT was Burnt at tx:    https://preview.cexplorer.io/tx/${txHash} `);
 

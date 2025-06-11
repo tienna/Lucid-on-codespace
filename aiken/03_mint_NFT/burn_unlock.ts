@@ -38,23 +38,24 @@ const utxo = utxos.find(u => u.assets[unit] && u.assets[unit] >= 1n);
 if (!utxo) throw new Error("Không tìm thấy UTXO chứa NFT");
 console.log(utxo);
 
-const utxo1 = utxos.find((u) => Object.keys(u.assets).length === 1 && u.assets?.lovelace > 5000000n)
-console.log(utxo1);
+// const utxo1 = utxos.find((u) => Object.keys(u.assets).length === 1 && u.assets?.lovelace > 5000000n)
+// console.log(utxo1);
 
 
-// 1 tương ứng với vị trí thứ 2 của của redeemer trong aiken ==Burn
-const mintRedeemer = Data.to(new Constr(1, []));
-const tx = await lucid
-    .newTx()
-    .mint({[unit]: -1n},mintRedeemer)
-    .collectFrom([utxo])
-    .collectFrom([utxo1])
-    .attachScript(parameterized_script)
-    .addSigner(payment_hash)
-    .commit();
-const signedTx = await tx.sign().commit();
-const txHash = await signedTx.submit();
-console.log(`A NFT was Burnt at tx:    https://preview.cexplorer.io/tx/${txHash} `);
+// // 1 tương ứng với vị trí thứ 2 của của redeemer trong aiken ==Burn
+// const mintRedeemer = Data.to(new Constr(1, []));
+// const tx = await lucid
+//     .newTx()
+//     .mint({[unit]: -1n},mintRedeemer)
+//     .collectFrom([utxo])
+//     .collectFrom([utxo1])
+//     .attachScript(parameterized_script)
+//     .addSigner(payment_hash)
+//     .commit();
+// const signedTx = await tx.sign().commit();
+// await Deno.writeTextFile("burntx-signedTx.cbor", signedTx);
+// const txHash = await signedTx.submit();
+// console.log(`A NFT was Burnt at tx:    https://preview.cexplorer.io/tx/${txHash} `);
 
  
 

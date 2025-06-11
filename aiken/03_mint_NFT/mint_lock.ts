@@ -40,6 +40,7 @@ const tx = await lucid
       .attachScript(parameterized_script)
       .commit();
 const signedTx = await tx.sign().commit();
+await Deno.writeTextFile("mintx-signedTx.cbor", signedTx);
 const txHash = await signedTx.submit();
 console.log(`A NFT was mint at tx:    https://preview.cexplorer.io/tx/${txHash} `);
 

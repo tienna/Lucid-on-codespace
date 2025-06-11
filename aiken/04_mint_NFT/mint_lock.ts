@@ -19,7 +19,7 @@ const lucid = new Lucid({
 lucid.selectWalletFromSeed(Bob_mnonic);
 
 //====================xử lý param==================
-const token_name = fromText("BK03_0003");
+const token_name = fromText("BK02_0005");
 const fee_value = 10000000n;
 // const payment_credential = paymentCredentialOf("addr_test1qqew6jaz63u389gwnp8w92qntetzxs6j9222pn4cnej672vazs7a6wnrseqggj4d4ur43yq9e23r4q0m879t7efyhzjq8mvzua").hash;
 // 32ed4ba2d47913950e984ee2a8135e562343522a94a0ceb89e65af29
@@ -30,11 +30,6 @@ const payment_credential = Addresses.inspect(
 console.log(payment_credential);
 
 const validator = await readValidator();
-// const parameterized_cbor = applyParamsToScript([token_name,fee_value,payment_credential],validator.script);
-// const parameterized_script = lucid.newScript({
-//   type: "PlutusV3",
-//   script: parameterized_cbor,
-// });
 const Params = [Data.Bytes(), Data.Integer(), Data.Bytes()];
 const parameterized_script = lucid.newScript(
   {
@@ -48,7 +43,7 @@ const parameterized_script = lucid.newScript(
 const scriptAddress = parameterized_script.toAddress();
 console.log(`Địa chỉ Parameterized script là: ${scriptAddress}`);
 const policyId = parameterized_script.toHash();
-const unit = policyId + fromText("BK03_0003");
+const unit = policyId + fromText("BK02_0005");
 
 const mintRedeemer = Data.to(new Constr(0, []));
 // const mintRedeemer = Data.void()
@@ -63,7 +58,7 @@ const tx = await lucid
   .commit();
 
 const signedTx = await tx.sign().commit();
-await Deno.writeTextFile("BK03_0003-signedTx.cbor", signedTx);
+await Deno.writeTextFile("Mint-signedTx.cbor", signedTx);
 const txHash = await signedTx.submit();
 console.log(`A NFT was mint at tx:    https://preview.cexplorer.io/tx/${txHash} `);
 

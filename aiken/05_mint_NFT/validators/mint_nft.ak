@@ -1,9 +1,9 @@
 use aiken/collection/dict
 use aiken/collection/list
 // use aiken/crypto.{ VerificationKeyHash }
-use cardano/address.{ Address, Script }
-use cardano/assets.{ PolicyId, lovelace_of }
-use cardano/transaction.{ Input, Output, OutputReference, Transaction } as tx
+use cardano/address.{Address, Script}
+use cardano/assets.{PolicyId, lovelace_of}
+use cardano/transaction.{Input, Output, OutputReference, Transaction} as tx
 
 pub type Action {
   Mint
@@ -58,14 +58,9 @@ fn find_output(outputs: List<Output>, fee: Int, addr_cred: ByteArray) {
   list.any(
     outputs,
     fn(output) {
-      // lovelace_of(output.value) >= fee && output.address.payment_credential == addr_cred
-      // lovelace_of(output.value) >= fee && output.address.payment_credential == address.from_verification_key(
-      //   #"32ed4ba2d47913950e984ee2a8135e562343522a94a0ceb89e65af29",
-      // ).payment_credential
-      lovelace_of(output.value) >= fee &&
-        output.address.payment_credential ==
-          address.from_verification_key(addr_cred).payment_credential
+      lovelace_of(output.value) >= fee && output.address.payment_credential == address.from_verification_key(
+        addr_cred,
+      ).payment_credential
     },
   )
 }
-
